@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import GetUsers from './pages/GetUsers';
 import InscriptionPage from './pages/InscriptionPage';
+import PatchUsers from './pages/PatchUsers';
 // import Testes from './pages/test';
 // import UsersList from './pages/theyUsersListPage';
 //import Test from './pages/Test';
@@ -18,6 +19,7 @@ function App() {
           <Route path="/InscriptionPage" element={<InscriptionPage />} />
 
           <Route path="/GetUsers" element={<GetUsers />} />
+          <Route path="/PatchUsers" element={<PatchUsers />} />
         </Routes>
       </BrowserRouter>
     </div>
