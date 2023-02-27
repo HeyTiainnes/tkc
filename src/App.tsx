@@ -1,12 +1,24 @@
 import React from 'react';
-
-import './App.css';
+//import inscriptionPage from './pages/inscriptionPage';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import InscriptionPage from './pages/InscriptionPage';
+// import Testes from './pages/test';
+// import UsersList from './pages/theyUsersListPage';
+//import Test from './pages/Test';
+// import InscriptionPage from './pages/inscriptionPage';
+// import inscriptionPage from './pages/inscriptionPage';
 
 function App() {
   return (
     <div>
-      <p>Reload, empty at 27/02/2033, 12h22</p>
-      <p>premier test push main</p>
+      <BrowserRouter>
+        <Routes>
+
+          <Route path="/InscriptionPage" element={<InscriptionPage />} />
+
+
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
