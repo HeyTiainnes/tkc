@@ -1,6 +1,7 @@
 import React from 'react';
 //import inscriptionPage from './pages/inscriptionPage';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import GetUsers from './pages/GetUsers';
 import InscriptionPage from './pages/InscriptionPage';
 // import Testes from './pages/test';
 // import UsersList from './pages/theyUsersListPage';
@@ -16,7 +17,7 @@ function App() {
 
           <Route path="/InscriptionPage" element={<InscriptionPage />} />
 
-
+          <Route path="/GetUsers" element={<GetUsers />} />
         </Routes>
       </BrowserRouter>
     </div>
