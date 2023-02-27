@@ -30,20 +30,52 @@ const GetUsers = () => {
             });
     };
 
+    // Fonction pour supprimer un utilisateur de la liste
+    const deleteUser = (id: string) => {
+        // Requête pour supprimer l'utilisateur depuis l'API
+        axios
+            .delete(`http://localhost:3000/theyUsers/${id}`)
+            .then(() => {
+                // Mise à jour du state en supprimant l'utilisateur de la liste
+                setListUsers(listUsers.filter((user) => user.id_users !== id));
+            })
+            .catch((error) => {
+                // Gestion des erreurs en cas d'échec de la suppression de l'utilisateur depuis l'API
+                console.log("Erreur lors de la suppression de l'utilisateur", error);
+            });
+    };
+
     return (
         <div>
             {/* Bouton de récupération des utilisateurs */}
             <button ref={BtnUsersList} onClick={BtnHandlerClick}>
                 Récupérer la liste des utilisateurs
             </button>
-            {/* Affichage de la liste des utilisateurs */}
+            {/* Tableau responsive pour afficher la liste des utilisateurs */}
             {listUsers.length > 0 ? (
-                listUsers.map((user) => (
-                    <div key={user.id_users}>
-                        <p>Nom: {user.name}</p>
-                        <p>Email: {user.mail}</p>
-                    </div>
-                ))
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {listUsers.map((user) => (
+                            <tr key={user.id_users}>
+                                <td>{user.name}</td>
+                                <td>{user.mail}</td>
+                                <td>
+                                    {/* Bouton pour modifier l'utilisateur */}
+                                    <button>Modifier</button>
+                                    {/* Bouton pour supprimer l'utilisateur */}
+                                    <button onClick={() => deleteUser(user.id_users)}>Supprimer</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             ) : (
                 <p>Aucun utilisateur à afficher pour le moment.</p>
             )}
@@ -53,6 +85,62 @@ const GetUsers = () => {
 
 export default GetUsers;
 
+//////////////new//////////////////////
+// import { useRef, useState } from "react";
+// import axios from "axios";
+
+// // Interface pour définir la forme d'un objet ou d'une classe
+// export interface UsersList {
+//     id_users: string;
+//     name: string;
+//     mail: string;
+//     password: string;
+// }
+
+// const GetUsers = () => {
+//     // Déclaration d'un state pour stocker la liste des utilisateurs
+//     const [listUsers, setListUsers] = useState<UsersList[]>([]);
+//     // Référence au bouton de récupération des utilisateurs
+//     const BtnUsersList = useRef<HTMLButtonElement>(null);
+
+//     // Fonction de gestion de l'événement de clic sur le bouton de récupération des utilisateurs
+//     const BtnHandlerClick = () => {
+//         // Requête pour récupérer la liste des utilisateurs depuis l'API
+//         axios
+//             .get("http://localhost:3000/theyUsers")
+//             .then((response) => {
+//                 // Mise à jour du state avec la liste des utilisateurs récupérée depuis l'API
+//                 setListUsers(response.data);
+//             })
+//             .catch((error) => {
+//                 // Gestion des erreurs en cas d'échec de la récupération de la liste des utilisateurs depuis l'API
+//                 console.log("Erreur lors de la récupération de la liste des utilisateurs", error);
+//             });
+//     };
+
+//     return (
+//         <div>
+//             {/* Bouton de récupération des utilisateurs */}
+//             <button ref={BtnUsersList} onClick={BtnHandlerClick}>
+//                 Récupérer la liste des utilisateurs
+//             </button>
+//             {/* Affichage de la liste des utilisateurs */}
+//             {listUsers.length > 0 ? (
+//                 listUsers.map((user) => (
+//                     <div key={user.id_users}>
+//                         <p>Nom: {user.name}</p>
+//                         <p>Email: {user.mail}</p>
+//                     </div>
+//                 ))
+//             ) : (
+//                 <p>Aucun utilisateur à afficher pour le moment.</p>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default GetUsers;
+///////////////////////////////////////////////////////////////////////////////////////// LAST /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // import { useNavigate } from "react-router-dom"
