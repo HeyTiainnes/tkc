@@ -1,35 +1,105 @@
-import React from "react";
-import './NewTask.css';
-
+import React, { FormEvent, useRef, useState } from "react";
+import "./NewTask.css";
+import axios from "axios";
 
 const NewTask = () => {
+
+
+    const designation = useRef<HTMLInputElement>(null);
+    const dead_line = useRef<HTMLInputElement>(null);
+    const duration = useRef<HTMLInputElement>(null);
+    const date_debut_prevue = useRef<HTMLInputElement>(null);
+    //const etat = useRef<HTMLInputElement>(false)
+    const notes = useRef<HTMLTextAreaElement>(null);
+
+
+    const handleSubmit = (e: FormEvent) => {
+        // e.preventDefault();
+        // const data = {
+        //     designation,
+        //     deadline,
+        //     duration,
+        //     startDate,
+        //     notes,
+        // };
+
+        axios
+            .post("/Tasks",)
+            .then((response) => {
+                console.log("Données envoyées avec succès à la base de données !");
+            })
+            .catch((error) => {
+                console.error(
+                    "Erreur lors de l'envoi des données à la base de données : ",
+                    error
+                );
+            });
+
+    };
     return (
         <>
-
             <div className="container">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <label htmlFor="designation">
                         Designation<span className="required">*</span>
-                    </label><br></br>
-                    <input type="text" id="designation" name="designation" required /><br></br>
+                    </label>
+                    <br />
+                    <input
+                        type="text"
+                        id="designation"
+                        name="designation"
+                        required
+                        ref={designation}
+                    // value={designation}
+                    // onChange={(event) => designation(event.target.value)}
+                    />
+                    <br />
 
-                    <label htmlFor="deadline">Deadline</label><br></br>
-                    <input type="datetime-local" id="deadline" name="deadline" /><br></br>
+                    <label htmlFor="deadline">Deadline</label>
+                    <br />
+                    <input
+                        type="date"
+                        id="deadline"
+                        name="deadline"
+                        ref={dead_line}
+                    // value={deadline}
+                    // onChange={(event) => setDeadline(event.target.value)}
+                    />
+                    <br />
 
-                    <label htmlFor="duration">Duration</label><br></br>
+                    <label htmlFor="duration">Duration</label>
+                    <br />
                     <input
                         type="text"
                         id="duration"
                         name="duration"
                         placeholder="eg. 2d 3h 30m"
-                    /><br></br>
+                        ref={duration}
+                    // value={duration}
+                    // onChange={(event) => setDuration(event.target.value)}
+                    />
+                    <br />
 
-                    <label htmlFor="startdate">Start Date</label><br></br>
-                    <input type="datetime-local" id="startdate" name="startdate" /><br></br>
+                    <label htmlFor="startdate">Start Date</label>
+                    <br />
+                    <input
+                        type="date"
+                        id="startdate"
+                        name="startdate"
+                        ref={date_debut_prevue}
+                    // value={startDate}
+                    // onChange={(event) => setStartDate(event.target.value)}
+                    />
+                    <br />
 
-                    <label htmlFor="notes">Notes (255 characters max)</label><br></br>
-                    <textarea id="notes" name="notes" maxLength={255}></textarea>
-
+                    <label htmlFor="notes">Notes (255 characters max)</label>
+                    <br />
+                    <textarea
+                        id="notes"
+                        name="notes"
+                        maxLength={255}
+                        ref={notes}
+                    />
                     <div className="buttons">
                         <button type="reset" id="cancel">
                             Cancel
@@ -42,6 +112,7 @@ const NewTask = () => {
             </div>
         </>
     );
+
 };
 
 export default NewTask;

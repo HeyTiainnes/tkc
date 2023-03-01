@@ -28,7 +28,7 @@ const Inscription = () => {
             .then((response) => {
                 console.log(response);
                 console.log(response.data);
-                navigate("/test");
+
             })
             .catch((err) => {
                 console.log(err);

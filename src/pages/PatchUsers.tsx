@@ -1,5 +1,7 @@
+
 // import { useRef, useEffect, useState } from "react";
 // import axios from "axios";
+// import { useParams } from "react-router-dom";
 
 // interface User {
 //     id_users?: string;
@@ -8,7 +10,7 @@
 //     mail?: string;
 //     password?: string;
 // }
-
+// //
 // const PatchUsers = () => {
 //     const [user, setUser] = useState<User>();
 //     const firstnameElement = useRef<HTMLInputElement>(null);
@@ -16,8 +18,9 @@
 //     const emailElement = useRef<HTMLInputElement>(null);
 //     const passwordElement = useRef<HTMLInputElement>(null);
 
+//     const { id } = useParams<{ id: string }>(); // Récupération de l'ID de l'URL
+
 //     useEffect(() => {
-//         const id = "1"; // ID de l'utilisateur à modifier
 //         axios
 //             .get(`http://localhost:3000/theyUsers/${id}`)
 //             .then((response) => {
@@ -26,7 +29,7 @@
 //             .catch((err) => {
 //                 console.log(err);
 //             });
-//     }, []);
+//     }, [id]); // Utilisation de l'ID dans les dépendances de useEffect
 
 //     const handleSubmitForm = (e: React.FormEvent) => {
 //         e.preventDefault();
@@ -113,6 +116,7 @@
 import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
 
 interface User {
     id_users?: string;
@@ -121,7 +125,34 @@ interface User {
     mail?: string;
     password?: string;
 }
-//
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Label = styled.label`
+  margin-bottom: 10px;
+`;
+
+const Input = styled.input`
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  width: 100%;
+`;
+
+const Button = styled.button`
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0070f3;
+  color: white;
+  cursor: pointer;
+`;
+
 const PatchUsers = () => {
     const [user, setUser] = useState<User>();
     const firstnameElement = useRef<HTMLInputElement>(null);
@@ -129,7 +160,7 @@ const PatchUsers = () => {
     const emailElement = useRef<HTMLInputElement>(null);
     const passwordElement = useRef<HTMLInputElement>(null);
 
-    const { id } = useParams<{ id: string }>(); // Récupération de l'ID de l'URL
+    const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
         axios
@@ -140,7 +171,7 @@ const PatchUsers = () => {
             .catch((err) => {
                 console.log(err);
             });
-    }, [id]); // Utilisation de l'ID dans les dépendances de useEffect
+    }, [id]);
 
     const handleSubmitForm = (e: React.FormEvent) => {
         e.preventDefault();
@@ -174,52 +205,48 @@ const PatchUsers = () => {
     }
 
     return (
-        <form onSubmit={handleSubmitForm}>
-            <div>
-                <label htmlFor="firstname">Prénom :</label>
-                <input
-                    type="text"
-                    name="firstname"
-                    id="firstname"
-                    value={user.firstname}
-                    onChange={handleInputChange}
-                    ref={firstnameElement}
-                />
-            </div>
-            <div>
-                <label htmlFor="name">Nom :</label>
-                <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    value={user.name}
-                    onChange={handleInputChange}
-                    ref={nameElement}
-                />
-            </div>
-            <div>
-                <label htmlFor="email">Adresse e-mail :</label>
-                <input
-                    type="email"
-                    name="mail"
-                    id="email"
-                    value={user.mail}
-                    onChange={handleInputChange}
-                    ref={emailElement}
-                />
-            </div>
-            <div>
-                <label htmlFor="password">Mot de passe :</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    onChange={handleInputChange}
-                    ref={passwordElement}
-                />
-            </div>
-            <button type="submit">Enregistrer les modifications</button>
-        </form>
+        <Form onSubmit={handleSubmitForm}>
+            <Label htmlFor="firstname">Prénom :</Label>
+            <Input
+                type="text"
+                name="firstname"
+                id="firstname"
+                value={user.firstname}
+                onChange={handleInputChange}
+                ref={firstnameElement}
+            />
+
+            <Label htmlFor="name">Nom :</Label>
+            <Input
+                type="text"
+                name="name"
+                id="name"
+                value={user.name}
+                onChange={handleInputChange}
+                ref={nameElement}
+            />
+
+            <Label htmlFor="email">Adresse e-mail :</Label>
+            <Input
+                type="email"
+                name="mail"
+                id="email"
+                value={user.mail}
+                onChange={handleInputChange}
+                ref={emailElement}
+            />
+
+            <Label htmlFor="password">Mot de passe :</Label>
+            <Input
+                type="password"
+                name="password"
+                id="password"
+                onChange={handleInputChange}
+                ref={passwordElement}
+            />
+
+            <Button type="submit">Enregistrer les modifications</Button>
+        </Form>
     );
 };
 
