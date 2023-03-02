@@ -13,7 +13,7 @@ const NewTask = () => {
             deadline: deadlineRef.current?.value,
             notes: notesRef.current?.value,
         };
-
+        console.log(data);
         axios
             .post("http://localhost:3000/Tasks", data)
             .then((response) => {
