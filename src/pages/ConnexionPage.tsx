@@ -6,13 +6,13 @@ interface LoginFormProps {
 }
 
 interface LoginFormData {
-    username: string;
+    name: string;
     password: string;
 }
 
 const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
     const [formData, setFormData] = useState<LoginFormData>({
-        username: "",
+        name: "",
         password: "",
     });
 
@@ -27,7 +27,7 @@ const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
         event.preventDefault();
 
         try {
-            const response = await axios.post("/api/login", formData);
+            const response = await axios.post("http://localhost:3000/auth/login", formData);
             if (response.status === 200) {
                 onLoginSuccess();
             }
@@ -39,11 +39,11 @@ const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
     return (
         <form onSubmit={handleSubmit}>
             <label>
-                Username:
+                name:
                 <input
                     type="text"
-                    name="username"
-                    value={formData.username}
+                    name="name"
+                    value={formData.name}
                     onChange={handleInputChange}
                 />
             </label>
@@ -57,7 +57,7 @@ const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
                 />
             </label>
             <button type="submit">Valider</button>
-            <button type="button" onClick={() => setFormData({ username: "", password: "" })}>Annuler</button>
+            <button type="button" onClick={() => setFormData({ name: "", password: "" })}>Annuler</button>
         </form>
     );
 };

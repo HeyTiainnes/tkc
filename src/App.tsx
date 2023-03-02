@@ -25,7 +25,9 @@ function App() {
           <Route path="/GetUsers" element={<GetUsers />} />
 
           <Route path="/PatchUsers/:id" element={<PatchUsers />} />
-          <Route path="/ConnexionPage" element={<LoginForm />} />
+          <Route path="/ConnexionPage" element={<LoginForm onLoginSuccess={function (): void {
+            throw new Error('Function not implemented.');
+          }} />} />
 
           <Route path="/NewTask" element={<NewTask />} />
         </Routes>
