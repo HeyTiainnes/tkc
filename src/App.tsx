@@ -9,6 +9,7 @@ import Navbar from './components/BurgerMenu';
 import Home from './pages/home';
 import Tasks from './pages/TaskLists';
 import NewTask from './pages/NewTask'
+import LoginForm from './pages/ConnexionPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/GetUsers" element={<GetUsers />} />
 
           <Route path="/PatchUsers/:id" element={<PatchUsers />} />
+          <Route path="/ConnexionPage" element={<LoginForm />} />
 
           <Route path="/NewTask" element={<NewTask />} />
         </Routes>

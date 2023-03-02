@@ -19,7 +19,7 @@ const Inscription = () => {
         console.log(passwordElement.current?.value);
 
         axios
-            .post('http://localhost:3000/theyUsers', {
+            .post('http://localhost:3000/auth/register', {
                 firstname: firstnameElement.current?.value,
                 name: nameElement.current?.value,
                 mail: emailElement.current?.value,
