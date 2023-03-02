@@ -10,7 +10,7 @@ const NewTask = () => {
         e.preventDefault();
         const data = {
             designation: designationRef.current?.value,
-            deadline: deadlineRef.current?.value,
+            dead_line: deadlineRef.current?.value,
             notes: notesRef.current?.value,
         };
         console.log(data);
@@ -40,12 +40,12 @@ const NewTask = () => {
                 />
                 <br />
 
-                <label htmlFor="deadline">Deadline</label>
+                <label htmlFor="dead_line">Deadline</label>
                 <br />
                 <input
                     type="date"
-                    id="deadline"
-                    name="deadline"
+                    id="dead_line"
+                    name="dead_line"
                     required
                     pattern="\d{4}-\d{2}-\d{2}"
                     placeholder="YYYY-MM-DD"
