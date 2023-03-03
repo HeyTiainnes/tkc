@@ -29,7 +29,13 @@ function App() {
             throw new Error('Function not implemented.');
           }} />} />
 
-          <Route path="/NewTask" element={<NewTask />} />
+          <Route path="/NewTask" element={<NewTask task={{
+            id: 0,
+            designation: '',
+            dead_line: '',
+            notes: '',
+            done: false
+          }} />} />
         </Routes>
       </BrowserRouter>
     </div>

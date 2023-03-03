@@ -1,17 +1,26 @@
-import React, { FormEvent, useRef } from "react";
-import axios from "axios";
 
-const NewTask = () => {
+import React, { FormEvent, useRef, useState } from "react";
+import axios from "axios";
+import { Task } from "./TaskLists"
+
+type NewTaskProps = {
+    task: Task;
+};
+
+const NewTask = ({ task }: NewTaskProps) => {
     const designationRef = useRef<HTMLInputElement>(null);
     const deadlineRef = useRef<HTMLInputElement>(null);
     const notesRef = useRef<HTMLTextAreaElement>(null);
+    const [designation, setDesignation] = useState<string>(task.designation);
+    const [deadline, setDeadline] = useState<string>(task.dead_line);
+    const [notes, setNotes] = useState<string>(task.notes);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         const data = {
-            designation: designationRef.current?.value,
-            dead_line: deadlineRef.current?.value,
-            notes: notesRef.current?.value,
+            designation: designation,
+            dead_line: deadline,
+            notes: notes,
         };
         console.log(data);
         axios
@@ -37,6 +46,8 @@ const NewTask = () => {
                     name="designation"
                     required
                     ref={designationRef}
+                    defaultValue={designation}
+                    onChange={(e) => setDesignation(e.target.value)}
                 />
                 <br />
 
@@ -49,15 +60,8 @@ const NewTask = () => {
                     required
                     pattern="\d{4}-\d{2}-\d{2}"
                     placeholder="YYYY-MM-DD"
-                    onChange={(event) => {
-                        const inputDate = event.target.value;
-                        const formattedDate = inputDate
-                            ? new Date(inputDate).toISOString().slice(0, 10)
-                            : "";
-                        if (deadlineRef.current) {
-                            deadlineRef.current.value = formattedDate;
-                        }
-                    }}
+                    defaultValue={deadline}
+                    onChange={(e) => setDeadline(e.target.value)}
                     ref={deadlineRef}
                 />
                 <br />
@@ -69,6 +73,8 @@ const NewTask = () => {
                     name="notes"
                     maxLength={255}
                     ref={notesRef}
+                    defaultValue={notes}
+                    onChange={(e) => setNotes(e.target.value)}
                 />
                 <div className="buttons">
                     <button type="reset" id="cancel">
