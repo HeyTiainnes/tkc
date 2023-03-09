@@ -66,7 +66,7 @@ const PatchUsers = () => {
         // Envoi d'une requête de type PATCH à l'API pour mettre à jour les informations de l'utilisateur
         axios
             .patch(`http://localhost:3000/theyUsers/${user?.id_users}`, {
-                firstname: firstnameElement.current?.value,
+                //firstname: firstnameElement.current?.value,
                 name: nameElement.current?.value,
                 mail: emailElement.current?.value,
                 password: passwordElement.current?.value,

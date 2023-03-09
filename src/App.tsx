@@ -38,7 +38,13 @@ function App() {
             notes: '',
             done: false
           }} />} />
-          <Route path="/PatchTask/:id" element={<PatchTask taskId={0} />} />
+          <Route path="/PatchTask/:id" element={<PatchTask task={{
+            id: 0,
+            designation: "",
+            dead_line: "",
+            notes: "",
+            done: false
+          }} />} />
         </Routes>
       </BrowserRouter>
     </div>
