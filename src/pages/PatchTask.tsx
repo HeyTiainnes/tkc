@@ -1,35 +1,58 @@
-import React, { FormEvent, useRef, useState } from "react";
-import axios from "axios";
-import { Task } from "./TaskLists";
+import React, { useState, useEffect, useRef } from 'react';
+import { Task } from './TaskLists';
 import './NewTask.css';
+import axios from 'axios';
 
-type NewTaskProps = {
-    task: Task;
+type PatchTaskProps = {
+    taskId: number;
 };
 
-const NewTask = ({ task }: NewTaskProps) => {
+const PatchTask: React.FC<PatchTaskProps> = ({ taskId }) => {
+    const [task, setTask] = useState<Task>({
+        id: 0,
+        designation: '',
+        dead_line: '',
+        notes: '',
+        done: false,
+    });
     const designationRef = useRef<HTMLInputElement>(null);
     const deadlineRef = useRef<HTMLInputElement>(null);
     const notesRef = useRef<HTMLTextAreaElement>(null);
-    const [designation, setDesignation] = useState<string>(task.designation);
-    const [deadline, setDeadline] = useState<string>(task.dead_line);
-    const [notes, setNotes] = useState<string>(task.notes);
 
-    const handleSubmit = (e: FormEvent) => {
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get<Task>(`http://localhost:3000/Tasks/${taskId}`);
+                setTask(response.data);
+                if (designationRef.current) {
+                    designationRef.current.value = response.data.designation;
+                }
+                if (deadlineRef.current) {
+                    deadlineRef.current.value = response.data.dead_line;
+                }
+                if (notesRef.current) {
+                    notesRef.current.value = response.data.notes;
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchData();
+    }, [taskId]);
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const data = {
-            designation: designation,
-            dead_line: deadline,
-            notes: notes,
+            designation: designationRef.current?.value ?? '',
+            dead_line: deadlineRef.current?.value ?? '',
+            notes: notesRef.current?.value ?? '',
         };
-        axios
-            .post("http://localhost:3000/Tasks", data)
-            .then(() => {
-                window.location.href = "/";
-            })
-            .catch((error) => {
-                console.error("erreur lors de l'envoi:", error);
-            });
+        try {
+            await axios.patch(`http://localhost:3000/Tasks/${taskId}`, data);
+            window.location.href = '/';
+        } catch (error) {
+            console.error('Error updating task:', error);
+        }
     };
 
     return (
@@ -45,8 +68,6 @@ const NewTask = ({ task }: NewTaskProps) => {
                     name="designation"
                     required
                     ref={designationRef}
-                    defaultValue={designation}
-                    onChange={(e) => setDesignation(e.target.value)}
                 />
                 <br />
 
@@ -59,8 +80,6 @@ const NewTask = ({ task }: NewTaskProps) => {
                     required
                     pattern="\d{4}-\d{2}-\d{2}"
                     placeholder="YYYY-MM-DD"
-                    defaultValue={deadline}
-                    onChange={(e) => setDeadline(e.target.value)}
                     ref={deadlineRef}
                 />
                 <br />
@@ -72,15 +91,13 @@ const NewTask = ({ task }: NewTaskProps) => {
                     name="notes"
                     maxLength={255}
                     ref={notesRef}
-                    defaultValue={notes}
-                    onChange={(e) => setNotes(e.target.value)}
                 />
                 <div className="buttons">
                     <button type="reset" id="cancel">
                         Cancel
                     </button>
                     <button type="submit" id="submit">
-                        Validate
+                        Update
                     </button>
                 </div>
             </form>
@@ -88,4 +105,4 @@ const NewTask = ({ task }: NewTaskProps) => {
     );
 };
 
-export default NewTask;
+export default PatchTask;

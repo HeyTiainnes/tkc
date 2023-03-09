@@ -6,7 +6,7 @@ import BoutonAnnuler from "../components/BoutonAnnuler";
 
 
 const Inscription = () => {
-    const firstnameElement = useRef<HTMLInputElement>(null);
+    //const firstnameElement = useRef<HTMLInputElement>(null);
     const nameElement = useRef<HTMLInputElement>(null);
     const emailElement = useRef<HTMLInputElement>(null);
     const passwordElement = useRef<HTMLInputElement>(null);
@@ -20,7 +20,7 @@ const Inscription = () => {
 
         axios
             .post('http://localhost:3000/auth/register', {
-                firstname: firstnameElement.current?.value,
+                // firstname: firstnameElement.current?.value,
                 name: nameElement.current?.value,
                 mail: emailElement.current?.value,
                 password: passwordElement.current?.value,
@@ -39,7 +39,7 @@ const Inscription = () => {
             <label htmlFor="basic-url" className="form-label fw-bold">
                 Pour vous inscrire: Entrez vos coordonnées.
             </label>
-            <div className="input-group mb-3">
+            {/* <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
                     Prénom
                 </span>
@@ -52,12 +52,12 @@ const Inscription = () => {
                     //  ref permet de mettre a jour mon champs
                     ref={firstnameElement}
                 />
-            </div>
+            </div> */}
 
             <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon2">
-                    NOM
-                </span>
+                    Name
+                </span><br></br>
                 <input
                     type="text"
                     className="form-control"
@@ -70,7 +70,7 @@ const Inscription = () => {
 
             <label htmlFor="basic-url" className="form-label">
                 LOGIN
-            </label>
+            </label><br></br>
             <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon2">
                     Adresse E.m@il
@@ -89,7 +89,7 @@ const Inscription = () => {
                     Mot de Passe
                 </span>
                 <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     placeholder="(Obligatoire)"
                     aria-label="Recipient's username"

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -10,11 +11,9 @@ export type Task = {
     done: boolean;
 };
 
-const TaskLists = () => {
-    // On utilise le Hook useState pour créer une variable d'état "tasks" initialisée à un tableau vide et une fonction "setTasks" pour la mettre à jour
+const TaskList = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
 
-    // On utilise le Hook useEffect pour exécuter une requête GET au démarrage du composant et mettre à jour la variable d'état "tasks"
     useEffect(() => {
         axios.get('http://localhost:3000/Tasks')
             .then(response => {
@@ -25,7 +24,6 @@ const TaskLists = () => {
             });
     }, []);
 
-    // On crée une fonction "handleDone" qui supprime une tâche de la base de données et met à jour la variable d'état "tasks"
     const handleDone = (taskId: number) => {
         axios.delete(`http://localhost:3000/Tasks/${taskId}`)
             .then(response => {
@@ -39,18 +37,17 @@ const TaskLists = () => {
             });
     };
 
-    // On crée une fonction "handleModify" qui redirige vers la page de modification d'une tâche avec l'id de la tâche dans l'URL
     const handleModify = (taskId: number) => {
         const task = tasks.find(task => task.id === taskId);
         if (task) {
-            window.location.href = `/newtask?id=${task.id}`;
+            window.location.href = `/PatchTask/${task.id}`;
+
         }
     };
 
-    // On retourne l'interface utilisateur avec une table qui affiche les tâches
     return (
         <div>
-            <h1>Task Lists</h1>
+            <h1>Task List</h1>
             <table>
                 <thead>
                     <tr>
@@ -83,4 +80,5 @@ const TaskLists = () => {
     );
 };
 
-export default TaskLists;
+export default TaskList;
+

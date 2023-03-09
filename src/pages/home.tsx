@@ -1,9 +1,11 @@
 import React from "react"; // Importation de React
 import { Link } from "react-router-dom"; // Importation du composant Link depuis react-router-dom
+import Nav from "../components/Nav";
 
 const Home: React.FC = () => { // Définition d'un composant fonctionnel nommé "Home"
     return (
         <div>
+            <Nav />
             {/* <h1>Page d'accueil</h1> // Affichage d'un titre */}
             <Link to="/connexion">
                 {/* // Utilisation du composant Link pour créer un lien vers la page "/connexion"  */}
