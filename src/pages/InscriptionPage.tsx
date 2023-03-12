@@ -1,59 +1,51 @@
+// Import de la bibliothèque axios qui permet de réaliser des requêtes HTTP
 import axios from "axios"
+// Import du hook useNavigate pour la navigation
 import { useNavigate } from "react-router-dom"
+// Import du hook useRef pour récupérer les valeurs des champs de formulaire
 import { useRef, FormEvent } from "react";
+// Import d'un composant personnalisé BoutonAnnuler
 import BoutonAnnuler from "../components/BoutonAnnuler";
-// import BoutonValider from "../components/BoutonValider";
-
-
+// Déclaration du composant Inscription
 const Inscription = () => {
-    //const firstnameElement = useRef<HTMLInputElement>(null);
+    // Initialisation des références aux champs de formulaire
     const nameElement = useRef<HTMLInputElement>(null);
     const emailElement = useRef<HTMLInputElement>(null);
     const passwordElement = useRef<HTMLInputElement>(null);
+    // Initialisation du hook useNavigate pour la navigation
     const navigate = useNavigate();
-
+    // Définition de la fonction pour la soumission du formulaire
     const handleSubmitForm = (e: FormEvent) => {
         e.preventDefault();
+        // Affichage des valeurs des champs de formulaire
         console.log("button form clicked", handleSubmitForm);
         console.log(emailElement.current?.value);
         console.log(passwordElement.current?.value);
-
+        // Requête HTTP POST pour l'inscription d'un utilisateur
         axios
             .post('http://localhost:3000/auth/register', {
-                // firstname: firstnameElement.current?.value,
                 name: nameElement.current?.value,
                 mail: emailElement.current?.value,
                 password: passwordElement.current?.value,
             })
             .then((response) => {
+                // Affichage de la réponse en cas de succès
                 console.log(response);
                 console.log(response.data);
-
             })
             .catch((err) => {
+                // Affichage de l'erreur en cas d'échec
                 console.log(err);
             });
     };
+    // Rendu du composant Inscription
     return (
         <div>
             <label htmlFor="basic-url" className="form-label fw-bold">
                 Pour vous inscrire: Entrez vos coordonnées.
             </label>
-            {/* <div className="input-group mb-3">
-                <span className="input-group-text" id="basic-addon1">
-                    Prénom
-                </span>
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Philippe (Exemple)"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                    //  ref permet de mettre a jour mon champs
-                    ref={firstnameElement}
-                />
-            </div> */}
 
+            {/* Champ de formulaire pour le nom */}
             <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon2">
                     Name
@@ -68,6 +60,7 @@ const Inscription = () => {
                 />
             </div>
 
+            {/* Champ de formulaire pour l'email */}
             <label htmlFor="basic-url" className="form-label">
                 LOGIN
             </label><br></br>
@@ -84,6 +77,8 @@ const Inscription = () => {
                     ref={emailElement}
                 />
             </div>
+
+            {/* Champ de formulaire pour le mot de passe */}
             <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon2">
                     Mot de Passe
@@ -105,7 +100,6 @@ const Inscription = () => {
                     onClick={handleSubmitForm}
                 >
                     Valider
-                    {/* < BoutonValider />{" "} */}
                 </button>
             </div>
         </div>

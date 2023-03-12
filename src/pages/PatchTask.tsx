@@ -4,7 +4,6 @@ import { Task } from './TaskLists';
 import './NewTask.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
 type PatchTaskProps = {
     task: Task;
 };

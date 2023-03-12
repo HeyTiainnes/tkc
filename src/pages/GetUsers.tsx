@@ -16,7 +16,7 @@ const GetUsers = () => {
                 console.log("Erreur lors de la récupération de la liste des utilisateurs", error);
             });
     };
-    //
+
     const deleteUser = (id: string) => {
         axios
             .delete(`http://localhost:3000/theyUsers/${id}`)
