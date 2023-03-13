@@ -6,7 +6,7 @@ import InscriptionPage from './pages/InscriptionPage';
 import PatchUsers from './pages/PatchUsers';
 //import NewTask from './pages/NewTask';
 //import Navbar from './components/BurgerMenu';
-import Home from './pages/Home';
+import Home from './pages/home';
 import Tasks from './pages/TaskLists';
 import NewTask from './pages/NewTask'
 import LoginForm from './pages/ConnexionPage';

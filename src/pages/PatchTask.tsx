@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Task } from './TaskLists';
-import './NewTask.css';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { useParams } from 'react-router-dom';
+
 type PatchTaskProps = {
     task: Task;
 };
@@ -18,17 +17,8 @@ const PatchTask: React.FC<PatchTaskProps> = ({ task }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<Task>(`http://localhost:3000/Tasks/${id}`);
+                const response: AxiosResponse<Task, any> = await axios.get<Task>(`http://localhost:3000/Tasks/${id}`);
                 setCurrentTask(response.data);
-                if (designationRef.current) {
-                    designationRef.current.value = response.data.designation;
-                }
-                if (deadlineRef.current) {
-                    deadlineRef.current.value = response.data.dead_line;
-                }
-                if (notesRef.current) {
-                    notesRef.current.value = response.data.notes;
-                }
             } catch (error) {
                 console.error(error);
             }
@@ -54,9 +44,7 @@ const PatchTask: React.FC<PatchTaskProps> = ({ task }) => {
     return (
         <div className="container">
             <form onSubmit={handleSubmit}>
-                <label htmlFor="designation">
-                    Designation<span className="required">*</span>
-                </label>
+                <label htmlFor="designation">Designation</label>
                 <br />
                 <input
                     type="text"
@@ -67,6 +55,8 @@ const PatchTask: React.FC<PatchTaskProps> = ({ task }) => {
                     defaultValue={currentTask.designation}
                 />
                 <br />
+
+                php
 
                 <label htmlFor="dead_line">Deadline</label>
                 <br />
@@ -101,6 +91,7 @@ const PatchTask: React.FC<PatchTaskProps> = ({ task }) => {
                 </div>
             </form>
         </div>
+
     );
 };
 
