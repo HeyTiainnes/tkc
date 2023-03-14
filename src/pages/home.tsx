@@ -5,11 +5,13 @@ import Nav from "../components/Nav";
 const Home: React.FC = () => { // Définition d'un composant fonctionnel nommé "Home"
     return (
         <div>
-            <Nav />
+            <button>Inscription</button>
+            <button>Connexion</button>
+            {/* <Nav /> */}
             {/* <h1>Page d'accueil</h1> // Affichage d'un titre */}
             <Link to="/connexion">
                 {/* // Utilisation du composant Link pour créer un lien vers la page "/connexion"  */}
-                <button>Start</button>
+                {/* <button>Start</button> */}
                 {/* // Affichage d'un bouton avec le texte "Se connecter" dans le lien */}
             </Link>
         </div >

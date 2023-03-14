@@ -36,19 +36,19 @@ const Nav = () => {
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/pageInscription" end className="nav-link">
+                                <NavLink to="/InscriptionPAge" end className="nav-link">
                                     Inscription
                                 </NavLink>
                             </li>
 
                             <li className="nav-item">
-                                <NavLink to="/pageConnexion" end className="nav-link">
+                                <NavLink to="/ConnexionPage" end className="nav-link">
                                     Connexion
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/pageMyProfil" end className="nav-link">
-                                    Mon compte
+                                <NavLink to="/GetUsers" end className="nav-link">
+                                    Users
                                 </NavLink>
                             </li>
                         </ul>

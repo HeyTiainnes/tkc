@@ -55,8 +55,10 @@ const GetUsers = () => {
                             <td>{user.name}</td>
                             <td>{user.mail}</td>
                             <td>
-                                <button onClick={() => window.location.href = `/edit-user/${user.id_users}`}>Modifier</button> // Bouton pour modifier l'utilisateur
-                                <button onClick={() => deleteUser(user.id_users)}>Supprimer</button> // Bouton pour supprimer l'utilisateur
+                                <button onClick={() => window.location.href = `/edit-user/${user.id_users}`}>Modifier</button>
+                                {/* Bouton pour modifier l'utilisateur */}
+                                <button onClick={() => deleteUser(user.id_users)}>Supprimer</button>
+                                {/* Bouton pour supprimer l'utilisateur */}
                             </td>
                         </tr>
                     ))}
@@ -67,8 +69,10 @@ const GetUsers = () => {
 
     return (
         <div>
-            <button ref={BtnUsersList} onClick={fetchUsers}>Récupérer la liste des utilisateurs</button> // Bouton pour récupérer la liste des utilisateurs
-            {renderUsers()} // Appel à la fonction pour afficher la liste des utilisateurs
+            <button ref={BtnUsersList} onClick={fetchUsers}>Récupérer la liste des utilisateurs</button>
+            {/* Bouton pour récupérer la liste des utilisateurs */}
+            {renderUsers()}
+            {/* Appel à la fonction pour afficher la liste des utilisateurs */}
         </div>
     );
 };

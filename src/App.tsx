@@ -19,6 +19,7 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
+
           <Route path="/Home" element={<Home />} />
           <Route path="/InscriptionPage" element={<InscriptionPage />} />
           <Route path="/TaskLists" element={<Tasks />} />
