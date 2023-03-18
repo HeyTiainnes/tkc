@@ -55,7 +55,7 @@ const GetUsers = () => {
                             <td>{user.name}</td>
                             <td>{user.mail}</td>
                             <td>
-                                <button onClick={() => window.location.href = `/edit-user/${user.id_users}`}>Modifier</button>
+                                <button onClick={() => window.location.href = `/PatchUsers/${user.id_users}`}>Modifier</button>
                                 {/* Bouton pour modifier l'utilisateur */}
                                 <button onClick={() => deleteUser(user.id_users)}>Supprimer</button>
                                 {/* Bouton pour supprimer l'utilisateur */}
