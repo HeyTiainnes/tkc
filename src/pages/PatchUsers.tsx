@@ -5,12 +5,14 @@ import axios from 'axios';
 interface User {
     id_users: string;
     name: string;
-    password: string;
+    email: string;
 }
 
 const PatchUsers = () => {
     const { id } = useParams<{ id: string }>(); // Récupération de l'ID de l'utilisateur à modifier depuis l'URL
-    const [user, setUser] = useState<User>({ id_users: id ?? '', name: '', password: '' }); // Déclaration d'un état local pour l'utilisateur à modifier
+    const [user, setUser] = useState<User>({ id_users: id ?? '', name: '', email: '' }); // Déclaration d'un état local pour l'utilisateur à modifier
+
+
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -20,7 +22,7 @@ const PatchUsers = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Empêcher la soumission du formulaire par défaut
         axios
-            .patch(`http://localhost:3000/theyUsers/${id}`, user) // Envoyer une requête PATCH vers l'API pour mettre à jour l'utilisateur correspondant
+            .patch(`http://localhost:3000/theyUsers/${id}`, { name: user.name, email: user.email }) // Envoyer une requête PATCH vers l'API pour mettre à jour l'utilisateur correspondant
             .then(() => {
                 console.log('Utilisateur modifié avec succès');
             })
@@ -50,14 +52,15 @@ const PatchUsers = () => {
                 </label>
                 <br />
                 <label>
-                    Mot de passe:
-                    <input type="password" name="password" value={user.password} onChange={handleChange} />
+                    Email:
+                    <input type="email" name="email" value={user.email} onChange={handleChange} />
                 </label>
                 <br />
                 <button type="submit">Modifier l'utilisateur</button>
             </form>
         </div>
     );
+
 };
 
 export default PatchUsers;
