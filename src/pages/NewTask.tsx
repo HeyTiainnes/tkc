@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import axios from "axios";
 import { Task } from "./TaskLists";
 import './NewTask.css';
@@ -56,7 +56,6 @@ const NewTask = ({ task }: NewTaskProps) => {
                     type="date"
                     id="dead_line"
                     name="dead_line"
-                    required
                     pattern="\d{4}-\d{2}-\d{2}"
                     placeholder="YYYY-MM-DD"
                     defaultValue={deadline}
