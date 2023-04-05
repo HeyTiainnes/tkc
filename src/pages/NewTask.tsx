@@ -23,9 +23,10 @@ const NewTask = ({ task }: NewTaskProps) => {
             notes: notes,
         };
         axios
-            .post("http://localhost:3000/Tasks", data)
+            // .post("http://localhost:8080/Tasks", data)
+            .post("http://localhost:8080/tasks", data)
             .then(() => {
-                window.location.href = "/";
+                window.location.href = "/TaskLists";
             })
             .catch((error) => {
                 console.error("erreur lors de l'envoi:", error);

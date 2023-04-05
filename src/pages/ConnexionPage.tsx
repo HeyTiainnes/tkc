@@ -27,9 +27,10 @@ const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
         event.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:3000/auth/login", formData);
+            const response = await axios.post("http://localhost:8080/auth/login", formData);
             if (response.status === 200) {
                 onLoginSuccess();
+                window.location.href = "/TaskLists";
             }
         } catch (error) {
             console.error(error);

@@ -15,7 +15,7 @@ const GetUsers = () => {
 
     const fetchUsers = () => { // Fonction pour récupérer la liste des utilisateurs depuis l'API
         axios
-            .get<User[]>("http://localhost:3000/theyUsers") // Requête HTTP GET vers l'API pour récupérer la liste des utilisateurs
+            .get<User[]>("http://localhost:8080/theyUsers") // Requête HTTP GET vers l'API pour récupérer la liste des utilisateurs
             .then((response) => { // Si la requête est réussie, mettre à jour l'état local de la liste des utilisateurs
                 setListUsers(response.data);
             })
@@ -26,7 +26,7 @@ const GetUsers = () => {
 
     const deleteUser = (id: string) => { // Fonction pour supprimer un utilisateur de la liste
         axios
-            .delete(`http://localhost:3000/theyUsers/${id}`) // Requête HTTP DELETE vers l'API pour supprimer l'utilisateur correspondant
+            .delete(`http://localhost:8080/theyUsers/${id}`) // Requête HTTP DELETE vers l'API pour supprimer l'utilisateur correspondant
             .then(() => { // Si la requête est réussie, mettre à jour l'état local de la liste des utilisateurs
                 setListUsers(listUsers.filter((user) => user.id_users !== id));
             })
