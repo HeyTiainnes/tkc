@@ -15,7 +15,7 @@ const DelUsers = (UserAsupprimer: UsersList) => {
     const [listUsers, setlistUsers] = useState<UsersList[]>([]);
 
     axios
-        .delete(`http://localhost:3000/theyUsers/${UserAsupprimer.id_users}`)
+        .delete(`http://localhost:8080/theyUsers/${UserAsupprimer.id_users}`)
 
         .then((retourUserAsupprimer) => {
             supp = retourUserAsupprimer.data;

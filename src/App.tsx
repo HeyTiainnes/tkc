@@ -1,6 +1,52 @@
 
-import React from 'react';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import React from 'react';
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import GetUsers from './pages/GetUsers';
+// import InscriptionPage from './pages/InscriptionPage';
+// import PatchUsers from './pages/PatchUsers';
+// import Home from './pages/home';
+// import Tasks from './pages/TaskLists';
+// import NewTask from './pages/NewTask';
+// import LoginForm from './pages/ConnexionPage';
+// import Nav from './components/Nav';
+// import PatchTask from './pages/PatchTask';
+
+// function App() {
+//   return (
+//     <div>
+//       <BrowserRouter>
+//         <Nav />
+//         <Routes>
+//           <Route path="/" element={<Home />} />
+//           <Route path="/InscriptionPAge" element={<InscriptionPage />} />
+//           <Route path="/TaskLists" element={<Tasks />} />
+//           <Route path="/GetUsers" element={<GetUsers />} />
+//           <Route path="/PatchUsers/:id" element={<PatchUsers />} />
+//           <Route path="/ConnexionPage" element={<LoginForm onLoginSuccess={() => setLoggedIn(true)}
+//             setUser={setUser} />} />
+//           <Route path="/NewTask" element={<NewTask task={{
+//             id: 0,
+//             designation: '',
+//             dead_line: '',
+//             notes: '',
+//             done: false
+//           }} />} />
+//           <Route path="/PatchTask/:id" element={<PatchTask task={{
+//             id: 0,
+//             designation: "",
+//             dead_line: "",
+//             notes: "",
+//             done: false
+//           }} />} />
+//         </Routes>
+//       </BrowserRouter>
+//     </div>
+//   );
+// }
+
+// export default App;
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import GetUsers from './pages/GetUsers';
 import InscriptionPage from './pages/InscriptionPage';
 import PatchUsers from './pages/PatchUsers';
@@ -10,38 +56,73 @@ import NewTask from './pages/NewTask';
 import LoginForm from './pages/ConnexionPage';
 import Nav from './components/Nav';
 import PatchTask from './pages/PatchTask';
+import ConnexionPage from './pages/ConnexionPage';
+import UserContext from './contexts/UserContext';
+import Header from './components/Header';
+
+export interface User {
+  id: number;
+  name: string;
+  mail: string;
+  password: string;
+}
 
 function App() {
+  const [user, setUser] = useState<User | null>(null);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  console.log("User state: ", user);
   return (
-    <div>
+    <UserContext.Provider value={user}>
       <BrowserRouter>
+        {/* <Header /> */}
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/InscriptionPAge" element={<InscriptionPage />} />
+          <Route path="/InscriptionPage" element={<InscriptionPage />} />
           <Route path="/TaskLists" element={<Tasks />} />
           <Route path="/GetUsers" element={<GetUsers />} />
           <Route path="/PatchUsers/:id" element={<PatchUsers />} />
-          <Route path="/ConnexionPage" element={<LoginForm onLoginSuccess={function (): void {
-            throw new Error('Function not implemented.');
-          }} />} />
-          <Route path="/NewTask" element={<NewTask task={{
-            id: 0,
-            designation: '',
-            dead_line: '',
-            notes: '',
-            done: false
-          }} />} />
-          <Route path="/PatchTask/:id" element={<PatchTask task={{
-            id: 0,
-            designation: "",
-            dead_line: "",
-            notes: "",
-            done: false
-          }} />} />
+          <Route
+            path="/ConnexionPage"
+            element={
+              <ConnexionPage
+                onLoginSuccess={() => setLoggedIn(true)}
+                setUser={setUser}
+              />
+            }
+          />
+          <Route
+            path="/NewTask"
+            element={
+              <NewTask
+                task={{
+                  id: 0,
+                  designation: '',
+                  dead_line: '',
+                  notes: '',
+                  done: false,
+                }}
+              />
+            }
+          />
+          <Route
+            path="/PatchTask/:id"
+            element={
+              <PatchTask
+                task={{
+                  id: 0,
+                  designation: '',
+                  dead_line: '',
+                  notes: '',
+                  done: false,
+                }}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
-    </div>
+    </UserContext.Provider>
   );
 }
 
