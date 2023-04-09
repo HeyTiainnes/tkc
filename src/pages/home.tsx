@@ -5,7 +5,8 @@ import Header from "../components/Header";
 
 const Home: React.FC = () => {
     const handleLogout = () => {
-        localStorage.removeItem("token"); // Supprime le token du local storage
+        localStorage.removeItem("user"); // Supprime le token du local storage
+        window.location.reload();
     };
 
     return (

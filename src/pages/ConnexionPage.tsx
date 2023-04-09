@@ -78,7 +78,7 @@ import Header from "../components/Header";
 
 interface LoginFormProps {
     onLoginSuccess: () => void;
-    setUser: React.Dispatch<React.SetStateAction<User | null>>;
+    setUser: (user: User | null) => void;
 }
 
 interface LoginFormData {
