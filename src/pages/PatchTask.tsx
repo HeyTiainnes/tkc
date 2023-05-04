@@ -23,7 +23,7 @@ const PatchTask: React.FC<PatchTaskProps> = ({ task }) => {
         const fetchData = async () => {
             try {
                 const response: AxiosResponse<Task, any> = await axios.get<Task>(
-                    `http://localhost:8080/tasks/${id}`
+                    `http://localhost:3000/todo/${id}`
                 );
                 // Met à jour l'état avec les données de la réponse
                 setCurrentTask(response.data);
@@ -45,7 +45,7 @@ const PatchTask: React.FC<PatchTaskProps> = ({ task }) => {
         };
         try {
             // Effectue une requête HTTP PATCH à l'API avec les données du formulaire pour mettre à jour la tâche correspondante
-            await axios.patch(`http://localhost:8080/tasks/${id}`, data);
+            await axios.patch(`http://localhost:3000/tasks/${id}`, data);
             // Redirige l'utilisateur vers la page d'accueil après la mise à jour de la tâche
             window.location.href = '/';
         } catch (error) {

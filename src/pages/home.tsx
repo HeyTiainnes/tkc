@@ -1,7 +1,7 @@
 // import React from "react";
 import { Link } from "react-router-dom";
 import Nav from "../components/Nav";
-import Header from "../components/Header";
+//import Header from "../components/Header";
 
 const Home: React.FC = () => {
     const handleLogout = () => {
@@ -11,7 +11,7 @@ const Home: React.FC = () => {
 
     return (
         <div>
-            <Header />
+            {/* // <Header /> */}
             <button onClick={handleLogout}>Déconnexion</button>
             {/* <Link to="/connexion">Se connecter</Link> */}
         </div>

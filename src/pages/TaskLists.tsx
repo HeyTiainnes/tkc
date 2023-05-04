@@ -17,7 +17,7 @@ const TaskList = () => {
 
     useEffect(() => {
         axios
-            .get('http://localhost:8080/tasks')
+            .get('http://localhost:3000/todo')
             .then((response) => {
                 setTasks(response.data);
             })
@@ -28,7 +28,7 @@ const TaskList = () => {
 
     const handleDone = (taskId: number) => {
         axios
-            .delete(`http://localhost:8080/tasks/${taskId}`)
+            .delete(`http://localhost:3000/tasks/${taskId}`)
             .then((response) => {
                 setTasks((prevTasks) =>
                     prevTasks.filter((task) => task.id !== taskId)

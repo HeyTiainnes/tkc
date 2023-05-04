@@ -23,9 +23,9 @@ const Inscription = () => {
         console.log(passwordElement.current?.value);
         // Requête HTTP POST pour l'inscription d'un utilisateur
         axios
-            .post('http://localhost:8080/auth/register', {
-                name: nameElement.current?.value,
-                mail: emailElement.current?.value,
+            .post('http://localhost:3000/user', {
+                username: nameElement.current?.value,
+                email: emailElement.current?.value,
                 password: passwordElement.current?.value,
             })
             .then((response) => {

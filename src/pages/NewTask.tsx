@@ -23,8 +23,8 @@ const NewTask = ({ task }: NewTaskProps) => {
             notes: notes,
         };
         axios
-            // .post("http://localhost:8080/Tasks", data)
-            .post("http://localhost:8080/tasks", data)
+            // .post("http://localhost:3000/Tasks", data)
+            .post("http://localhost:3000/todo", data)
             .then(() => {
                 window.location.href = "/TaskLists";
             })
