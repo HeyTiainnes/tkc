@@ -7,5 +7,4 @@ const BurgerMenu = () => {
         </div>
     );
 };
-
 export default BurgerMenu;
