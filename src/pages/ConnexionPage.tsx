@@ -27,7 +27,7 @@ const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
         event.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:3000/auth/login", formData);
+            const response = await axios.post("http://localhost:3010/auth/login", formData);
             if (response.status === 200) {
                 onLoginSuccess();
             }

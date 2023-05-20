@@ -22,7 +22,7 @@ const PatchUsers = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Empêcher la soumission du formulaire par défaut
         axios
-            .patch(`http://localhost:3000/theyUsers/${id}`, { name: user.name, email: user.email }) // Envoyer une requête PATCH vers l'API pour mettre à jour l'utilisateur correspondant
+            .patch(`http://localhost:3010/theyUsers/${id}`, { name: user.name, email: user.email }) // Envoyer une requête PATCH vers l'API pour mettre à jour l'utilisateur correspondant
             .then(() => {
                 console.log('Utilisateur modifié avec succès');
             })
@@ -33,7 +33,7 @@ const PatchUsers = () => {
 
     useEffect(() => {
         axios
-            .get<User>(`http://localhost:3000/theyUsers/${id}`)
+            .get<User>(`http://localhost:3010/theyUsers/${id}`)
             // Récupérer les informations de l'utilisateur correspondant depuis l'API
             .then((response) => {
                 setUser(response.data);

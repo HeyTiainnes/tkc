@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -16,8 +14,13 @@ const TaskList = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+
         axios
-            .get('http://localhost:3000/Tasks')
+            .get('http://localhost:3010/Tasks/all', config)
             .then((response) => {
                 setTasks(response.data);
             })
@@ -27,8 +30,13 @@ const TaskList = () => {
     }, []);
 
     const handleDone = (taskId: number) => {
+        const token = localStorage.getItem('accessToken');
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+
         axios
-            .delete(`http://localhost:3000/Tasks/${taskId}`)
+            .delete(`http://localhost:3010/Tasks/${taskId}`, config)
             .then((response) => {
                 setTasks((prevTasks) =>
                     prevTasks.filter((task) => task.id !== taskId)

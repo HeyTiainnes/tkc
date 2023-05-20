@@ -53,6 +53,7 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
     "nodemon": "^2.0.20",
+    "webpack": "^4.46.0",
     "webpack-dev-server": "^4.11.1"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
