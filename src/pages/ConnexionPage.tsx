@@ -6,13 +6,13 @@ interface LoginFormProps {
 }
 
 interface LoginFormData {
-    name: string;
+    mail: string;
     password: string;
 }
 
 const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
     const [formData, setFormData] = useState<LoginFormData>({
-        name: "",
+        mail: "",
         password: "",
     });
 
@@ -39,11 +39,11 @@ const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
     return (
         <form onSubmit={handleSubmit}>
             <label>
-                name:
+                mail:
                 <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
+                    type="mail"
+                    name="mail"
+                    value={formData.mail}
                     onChange={handleInputChange}
                 />
             </label>
@@ -57,7 +57,7 @@ const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
                 />
             </label>
             <button type="submit">Valider</button>
-            <button type="button" onClick={() => setFormData({ name: "", password: "" })}>Annuler</button>
+            <button type="button" onClick={() => setFormData({ mail: "", password: "" })}>Annuler</button>
         </form>
     );
 };
