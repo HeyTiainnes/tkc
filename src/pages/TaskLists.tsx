@@ -17,7 +17,13 @@ const TaskList = () => {
 
     useEffect(() => {
         axios
-            .get('http://localhost:3000/Tasks')
+            .get('http://localhost:3000/Tasks'
+                , {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    },
+                }
+            )
             .then((response) => {
                 setTasks(response.data);
             })
@@ -28,7 +34,14 @@ const TaskList = () => {
 
     const handleDone = (taskId: number) => {
         axios
-            .delete(`http://localhost:3000/Tasks/${taskId}`)
+            .delete(`http://localhost:3000/Tasks/${taskId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    },
+                }
+
+            )
             .then((response) => {
                 setTasks((prevTasks) =>
                     prevTasks.filter((task) => task.id !== taskId)

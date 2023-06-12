@@ -16,6 +16,7 @@ const NewTask = ({ task }: NewTaskProps) => {
     const [notes, setNotes] = useState<string>(task.notes);
 
     const handleSubmit = (e: FormEvent) => {
+        console.log(localStorage.getItem('accessToken'));
         e.preventDefault();
         const data = {
             designation: designation,
@@ -23,7 +24,18 @@ const NewTask = ({ task }: NewTaskProps) => {
             notes: notes,
         };
         axios
-            .post("http://localhost:3000/Tasks", data)
+            // console.log(localStorage.getItem('token'));
+            .post(
+                'http://localhost:3000/Tasks',
+                data,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    },
+                }
+
+            )
+
             .then(() => {
                 window.location.href = "/";
             })

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from 'axios';
 
 interface LoginFormProps {
     onLoginSuccess: () => void;
@@ -27,9 +27,15 @@ const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
         event.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:3000/auth/login", formData);
-            if (response.status === 200) {
+            const response = await axios
+
+                .post("http://localhost:3000/auth/login", formData);
+            const token = response.data.accessToken;
+            if (token) {
+                localStorage.setItem('accessToken', token);
                 onLoginSuccess();
+
+
             }
         } catch (error) {
             console.error(error);
