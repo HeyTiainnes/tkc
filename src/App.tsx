@@ -61,6 +61,7 @@ import NewTask from './pages/NewTask';
 import LoginForm from './pages/ConnexionPage';
 import Nav from './components/Nav';
 import PatchTask from './pages/PatchTask';
+import NewCheckList from './pages/NewCheckList';
 
 function App() {
   return (
@@ -90,6 +91,7 @@ function App() {
             notes: "",
             done: false
           }} />} />
+          <Route path="/NewCheckList" element={<NewCheckList />} />
         </Routes>
       </BrowserRouter>
     </div>
