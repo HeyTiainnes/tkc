@@ -62,6 +62,7 @@ import LoginForm from './pages/ConnexionPage';
 import Nav from './components/Nav';
 import PatchTask from './pages/PatchTask';
 import NewCheckList from './pages/NewCheckList';
+import TaskDetail from './pages/TasksDetails';
 
 function App() {
   return (
@@ -77,6 +78,9 @@ function App() {
           <Route path="/ConnexionPage" element={<LoginForm onLoginSuccess={function (): void {
             throw new Error('Function not implemented.');
           }} />} />
+          <Route path="/TaskDetails/:taskId" element={<TaskDetail />} />
+
+
           <Route path="/NewTask" element={<NewTask task={{
             id: 0,
             designation: '',
