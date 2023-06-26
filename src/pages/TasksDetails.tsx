@@ -199,7 +199,7 @@ const TaskDetail = () => {
 
         // Récupérer les sous-tâches liées à la tâche
         axios
-            .get(`http://localhost:3000/Tasks/${taskId}/subtasks`, {
+            .get(`http://localhost:3000/Tasks/${taskId}/checkListItems`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
