@@ -1,28 +1,37 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+interface RouteParams {
+    taskId: string;
+    [key: string]: string | undefined;
+}
 
 const NewCheckList = () => {
     const [name, setName] = useState("");
     const [notes, setNotes] = useState("");
+    const navigate = useNavigate();
+    const { taskId } = useParams<RouteParams>();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         try {
-            // Envoyer les données à la base de données via Axios
+            const taskIdParsed = taskId ? parseInt(taskId, 10) : 0;
             const response = await axios.post("http://localhost:3000/checkListItems", {
                 name,
                 notes,
+                taskId: taskIdParsed,
             });
 
-            // Réinitialiser les champs du formulaire après l'enregistrement réussi
             setName("");
             setNotes("");
 
-            // Traiter la réponse ou effectuer d'autres actions nécessaires
             console.log(response.data);
+
+            navigate(`/TaskDetails/${taskId}`);
         } catch (error) {
-            // Gérer les erreurs de manière appropriée
             console.error(error);
         }
     };
@@ -46,6 +55,9 @@ const NewCheckList = () => {
                 />
 
                 <button type="submit">Enregistrer</button>
+                <button type="button" onClick={() => navigate(`/TaskDetails/${taskId}`)}>
+                    Annuler
+                </button>
             </form>
         </div>
     );

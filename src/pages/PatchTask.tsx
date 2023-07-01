@@ -86,7 +86,7 @@ const PatchTask: React.FC<PatchTaskProps> = ({ task }) => {
                     required
                     pattern="\d{4}-\d{2}-\d{2}"
                     placeholder="YYYY-MM-DD"
-                    defaultValue={currentTask.dead_line}
+                    defaultValue={currentTask.deadline}
                     ref={deadlineRef}
                 />
                 <br />

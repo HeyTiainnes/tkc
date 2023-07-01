@@ -1,119 +1,25 @@
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-// import axios from 'axios';
-
-// export type Task = {
-//     id: number;
-//     designation: string;
-//     dead_line: string;
-//     notes: string;
-//     done: boolean;
-// };
-
-// const TaskList = () => {
-//     const [tasks, setTasks] = useState<Task[]>([]);
-
-//     useEffect(() => {
-//         axios
-//             .get('http://localhost:3000/Tasks'
-//                 , {
-//                     headers: {
-//                         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-//                     },
-//                 }
-//             )
-//             .then((response) => {
-//                 setTasks(response.data);
-//             })
-//             .catch((error) => {
-//                 console.error(error);
-//             });
-//     }, []);
-
-//     const handleDone = (taskId: number) => {
-//         axios
-//             .delete(`http://localhost:3000/Tasks/${taskId}`,
-//                 {
-//                     headers: {
-//                         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-//                     },
-//                 }
-
-//             )
-//             .then((response) => {
-//                 setTasks((prevTasks) =>
-//                     prevTasks.filter((task) => task.id !== taskId)
-//                 );
-//                 console.log(`Task ${taskId} deleted successfully from the database!`);
-//             })
-//             .catch((error) => {
-//                 console.error(
-//                     `Error deleting task ${taskId} from the database:`,
-//                     error
-//                 );
-//             });
-//     };
-
-//     return (
-//         <div>
-//             <h1>Task List</h1>
-//             <table>
-//                 <thead>
-//                     <tr>
-//                         <th>Designation</th>
-//                         <th>Deadline</th>
-//                         <th>Notes</th>
-//                         <th>Done</th>
-//                         <th>Modify</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     {tasks.map((task) => (
-//                         <tr key={task.id}>
-//                             <td>{task.designation}</td>
-//                             <td>{task.dead_line}</td>
-//                             <td>{task.notes}</td>
-//                             <td>
-//                                 <button onClick={() => handleDone(task.id)}>
-//                                     {task.done ? 'Undone' : 'Done'}
-//                                 </button>
-//                             </td>
-//                             <td>
-//                                 <Link to={`/PatchTask/${task.id}`}>
-//                                     <button>Modify</button>
-//                                 </Link>
-//                             </td>
-//                         </tr>
-//                     ))}
-//                 </tbody>
-//             </table>
-//         </div>
-//     );
-// };
-
-// export default TaskList;
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+// import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export type Task = {
     id: number;
     designation: string;
-    dead_line: string;
+    deadline: string;
     notes: string;
     done: boolean;
 };
 
-const TaskList = () => {
+const TaskLists = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
-            .get('http://localhost:3000/Tasks', {
+            .get("http://localhost:3000/tasks", {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                 },
             })
             .then((response) => {
@@ -125,67 +31,57 @@ const TaskList = () => {
     }, []);
 
     const handleDone = (taskId: number) => {
+        const updatedTasks = tasks.map((task) => {
+            if (task.id === taskId) {
+                return { ...task, done: !task.done };
+            }
+            return task;
+        });
+
+        setTasks(updatedTasks);
+    };
+
+    const handleDelete = (taskId: number) => {
         axios
-            .delete(`http://localhost:3000/Tasks/${taskId}`, {
+            .delete(`http://localhost:3000/tasks/${taskId}`, {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                 },
             })
-            .then((response) => {
-                setTasks((prevTasks) =>
-                    prevTasks.filter((task) => task.id !== taskId)
-                );
-                console.log(`Task ${taskId} deleted successfully from the database!`);
+            .then(() => {
+                const updatedTasks = tasks.filter((task) => task.id !== taskId);
+                setTasks(updatedTasks);
             })
             .catch((error) => {
-                console.error(
-                    `Error deleting task ${taskId} from the database:`,
-                    error
-                );
+                console.error(error);
             });
     };
-    //
+
+    const handleAddSubtask = (taskId: number) => {
+        navigate(`/NewCheckList/${taskId}`);
+    };
+
     return (
         <div>
             <h1>Task List</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Designation</th>
-                        <th>Deadline</th>
-                        <th>Notes</th>
-                        <th>Done</th>
-                        <th>Modify</th>
-                        <th>Sous-tâches</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tasks.map((task) => (
-                        <tr key={task.id}>
-                            <td>{task.designation}</td>
-                            <td>{task.dead_line}</td>
-                            <td>{task.notes}</td>
-                            <td>
-                                <button onClick={() => handleDone(task.id)}>
-                                    {task.done ? 'Undone' : 'Done'}
-                                </button>
-                            </td>
-                            <td>
-                                <Link to={`/PatchTask/${task.id}`}>
-                                    <button>Modify</button>
-                                </Link>
-                            </td>
-                            <td>
-                                <Link to={`/TaskDetails/${task.id}`}>
-                                    <button>Sous-tâches</button>
-                                </Link>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <ul>
+                {tasks.map((task) => (
+                    <li key={task.id}>
+                        <input
+                            type="checkbox"
+                            checked={task.done}
+                            onChange={() => handleDone(task.id)}
+                        />
+                        <span>{task.designation}</span>
+                        <button onClick={() => handleDelete(task.id)}>Delete</button>
+                        <button onClick={() => handleAddSubtask(task.id)}>Add Subtask</button>
+                        <Link to={`/TaskDetails/${task.id}`}>View Subtasks</Link>
+                    </li>
+                ))}
+            </ul>
+            <Link to="/NewTask">New Task</Link>
         </div>
     );
 };
 
-export default TaskList;
+export default TaskLists;
