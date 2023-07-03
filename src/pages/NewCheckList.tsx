@@ -22,7 +22,7 @@ const NewCheckList = () => {
             const response = await axios.post("http://localhost:3000/checkListItems", {
                 name,
                 notes,
-                taskId: taskIdParsed,
+                tasksId: taskIdParsed, // Utilisation de "tasksId" au lieu de "taskId"
             });
 
             setName("");
@@ -30,7 +30,7 @@ const NewCheckList = () => {
 
             console.log(response.data);
 
-            navigate(`/TaskDetails/${taskId}`);
+            navigate(`/TaskLists`); // Redirection vers la page TaskLists
         } catch (error) {
             console.error(error);
         }
@@ -55,7 +55,10 @@ const NewCheckList = () => {
                 />
 
                 <button type="submit">Enregistrer</button>
-                <button type="button" onClick={() => navigate(`/TaskDetails/${taskId}`)}>
+                <button
+                    type="button"
+                    onClick={() => navigate(`/TaskLists`)} // Redirection vers la page TaskLists
+                >
                     Annuler
                 </button>
             </form>
