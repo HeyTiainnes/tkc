@@ -1,0 +1,16 @@
+.btn-Annuler {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-Annuler:hover {
+    background-color: #c82333;
+}
+
+.btn-Annuler:active {
+    background-color: #bd2130;
+}

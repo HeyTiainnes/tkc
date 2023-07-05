@@ -46,11 +46,11 @@ const Nav = () => {
                                     Connexion
                                 </NavLink>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <NavLink to="/GetUsers" end className="nav-link">
                                     Users
                                 </NavLink>
-                            </li>
+                            </li> */}
                             <li className="nav-item">
                                 <NavLink to="/TaskLists" end className="nav-link">
                                     Liste des tâches

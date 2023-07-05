@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom"
 // Import du hook useRef pour récupérer les valeurs des champs de formulaire
 import { useRef, FormEvent } from "react";
 // Import d'un composant personnalisé BoutonAnnuler
+// import BoutonAnnuler from "../components/BoutonAnnuler";
+import './InscriptionPage.css';
 import BoutonAnnuler from "../components/BoutonAnnuler";
 // Déclaration du composant Inscription
 const Inscription = () => {
