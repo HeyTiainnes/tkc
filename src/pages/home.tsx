@@ -4,7 +4,7 @@ import Nav from "../components/Nav";
 
 const Home: React.FC = () => {
     const handleLogout = () => {
-        localStorage.removeItem("token"); // Supprime le token du local storage
+        localStorage.removeItem("accessToken"); // Supprime le token du local storage
     };
 
     return (
