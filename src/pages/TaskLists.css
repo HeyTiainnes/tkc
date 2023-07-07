@@ -1,50 +1,146 @@
+/* Fichier TaskLists.css */
+
+/* ----------------------------------------------
+   Styles généraux
+---------------------------------------------- */
+
+/* Réinitialisation des styles par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Police de caractères et taille de texte par défaut */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+/* Conteneur principal */
 .container {
-    max-width: 800px;
+    max-width: 1200px;
+    /* Largeur maximale du contenu */
     margin: 0 auto;
+    /* Centrer le contenu horizontalement */
     padding: 20px;
 }
 
+/* ----------------------------------------------
+   Styles spécifiques pour les éléments de la page
+---------------------------------------------- */
+
+/* Titre principal */
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Tâches individuelles */
 .task {
     margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
     padding: 10px;
+    border: 1px solid #ccc;
 }
 
-.task h3 {
-    margin-top: 0;
-}
-
-.task p {
+/* En-tête de la tâche */
+.task-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 10px;
 }
 
-.task input[type="checkbox"] {
-    margin-right: 10px;
+/* Titre de la tâche */
+.task-title {
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.task button {
-    margin-right: 10px;
+/* Détails de la tâche */
+.task-details {
+    margin-bottom: 10px;
 }
 
-.task-list-link {
-    display: block;
-    margin-bottom: 20px;
-    text-decoration: none;
+/* Champ de saisie de texte */
+.input-text {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Boutons */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #555;
+}
+
+/* Lien de création de tâche */
+.create-task-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 16px;
     color: #333;
+    text-decoration: none;
 }
 
-@media screen and (max-width: 600px) {
-    .container {
-        padding: 10px;
+.create-task-link:hover {
+    text-decoration: underline;
+}
+
+/* ----------------------------------------------
+   Styles spécifiques pour la version responsive
+---------------------------------------------- */
+
+/* Pour les écrans de taille moyenne et plus petits */
+@media (max-width: 768px) {
+
+    /* Réduire la taille de la police du titre principal */
+    h2 {
+        font-size: 20px;
     }
 
-    .task {
-        padding: 5px;
+    /* Réduire la taille de la police du titre de la tâche */
+    .task-title {
+        font-size: 16px;
+    }
+}
+
+/* Pour les écrans de petite taille et plus petits */
+@media (max-width: 576px) {
+
+    /* Réduire la taille de la police du titre principal */
+    h2 {
+        font-size: 18px;
     }
 
-    .task button {
-        margin-right: 5px;
-        font-size: 12px;
+    /* Réduire la taille de la police du titre de la tâche */
+    .task-title {
+        font-size: 14px;
+    }
+
+    /* Centrer le texte des boutons */
+    .button {
+        text-align: center;
+    }
+
+    /* Réduire la taille de la police des boutons */
+    .button {
+        font-size: 14px;
+    }
+
+    /* Réduire la taille de la police du lien de création de tâche */
+    .create-task-link {
+        font-size: 14px;
     }
 }
