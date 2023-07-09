@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -18,7 +17,7 @@ export type CheckListItem = {
     name: string;
 };
 
-const TaskList = () => {
+const TaskLists = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
     const [editedTasks, setEditedTasks] = useState<Record<number, Partial<Task>>>({});
@@ -196,9 +195,8 @@ const TaskList = () => {
                             </>
                         ) : (
                             <>
-                                ```jsx
                                 <h3>{task.designation}</h3>
-                                <p>{task.deadline}</p>
+                                <p>{task.deadline && new Date(task.deadline).toLocaleDateString()}</p>
                                 <p>{task.notes}</p>
                                 <button className="delete-button" onClick={() => handleDeleteTask(task.id)}>
                                     Supprimer
@@ -227,4 +225,4 @@ const TaskList = () => {
     );
 };
 
-export default TaskList;
+export default TaskLists;
