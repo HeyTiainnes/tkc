@@ -157,67 +157,32 @@ const TaskLists = () => {
 
     return (
         <div>
-            <h5>Liste des tâches et sous-tâches prévues</h5>
+            <h5>Taches</h5>
             <div className="container">
                 {tasks.map((task) => (
                     <div className="task" key={task.id}>
-                        {editingTaskId === task.id ? (
-                            <>
-                                <label htmlFor="designation">Designation</label>
-                                <input
-                                    type="text"
-                                    name="designation"
-                                    value={editedTasks[task.id]?.designation || task.designation}
-                                    onChange={handleInputChange}
-                                />
-                                <br />
-                                <label htmlFor="deadline">Deadline</label>
-                                <input
-                                    type="date"
-                                    name="deadline"
-                                    value={editedTasks[task.id]?.deadline || task.deadline || ""}
-                                    onChange={handleInputChange}
-                                />
-                                <br />
-                                <label htmlFor="notes">Notes</label>
-                                <textarea
-                                    name="notes"
-                                    value={editedTasks[task.id]?.notes || task.notes}
-                                    onChange={handleInputChange}
-                                />
-                                <br />
-                                <button className="save-button" onClick={() => handleSave(task.id)}>
-                                    Valider
-                                </button>
-                                <button className="delete-button" onClick={handleCancel}>
-                                    Annuler
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <h3>{task.designation}</h3>
-                                <p>{task.deadline && new Date(task.deadline).toLocaleDateString()}</p>
-                                <p>{task.notes}</p>
-                                <button className="delete-button" onClick={() => handleDeleteTask(task.id)}>
-                                    Supprimer
-                                </button>
-                                {task.checkListItems &&
-                                    task.checkListItems.map((item) => (
-                                        <div className="subtask" key={item.id}>
-                                            <p>{item.name}</p>
-                                            <button className="delete-button" onClick={() => handleRemoveCheckListItem(item.id)}>
-                                                Supprimer
-                                            </button>
-                                        </div>
-                                    ))}
-                                <button className="add-button" onClick={() => handleAddCheckListItem(task.id)}>
-                                    Ajouter une sous-tâche
-                                </button>
-                                <button className="edit-button" onClick={() => handleEdit(task.id)}>
-                                    Modifier
-                                </button>
-                            </>
-                        )}
+                        <h3>{task.designation}</h3>
+                        <p>Date limite: {task.deadline && new Date(task.deadline).toLocaleDateString()}</p>
+                        <p>Notes: {task.notes}</p>
+                        <button className="delete-button" onClick={() => handleDeleteTask(task.id)}>
+                            Supprimer
+                        </button>
+                        <h5>Sous-tâches</h5>
+                        {task.checkListItems &&
+                            task.checkListItems.map((item) => (
+                                <div className="subtask" key={item.id}>
+                                    <p>{item.name}</p>
+                                    <button className="delete-button" onClick={() => handleRemoveCheckListItem(item.id)}>
+                                        Supprimer
+                                    </button>
+                                </div>
+                            ))}
+                        <button className="add-button" onClick={() => handleAddCheckListItem(task.id)}>
+                            + sous tache
+                        </button>
+                        <button className="edit-button" onClick={() => handleEdit(task.id)}>
+                            Modifier
+                        </button>
                     </div>
                 ))}
             </div>
