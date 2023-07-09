@@ -1,7 +1,7 @@
-// import React, { useState, useEffect } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import axios from 'axios';
-// import './TaskLists.css';
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import "./tasksList.css";
 
 // export type Task = {
 //     id: number;
@@ -26,9 +26,9 @@
 //     useEffect(() => {
 //         const fetchTasks = async () => {
 //             try {
-//                 const response = await axios.get('http://localhost:3000/tasks', {
+//                 const response = await axios.get("http://localhost:3000/tasks", {
 //                     headers: {
-//                         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+//                         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
 //                     },
 //                 });
 //                 setTasks(response.data);
@@ -55,7 +55,7 @@
 //         axios
 //             .delete(`http://localhost:3000/tasks/${taskId}`, {
 //                 headers: {
-//                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+//                     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
 //                 },
 //             })
 //             .then(() => {
@@ -75,7 +75,7 @@
 //         try {
 //             await axios.delete(`http://localhost:3000/checkListItems/${checkListItemId}`, {
 //                 headers: {
-//                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+//                     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
 //                 },
 //             });
 
@@ -140,6 +140,21 @@
 //         }));
 //     };
 
+//     const handleDeleteTask = async (taskId: number) => {
+//         try {
+//             await axios.delete(`http://localhost:3000/tasks/${taskId}`, {
+//                 headers: {
+//                     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+//                 },
+//             });
+
+//             const updatedTasks = tasks.filter((task) => task.id !== taskId);
+//             setTasks(updatedTasks);
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     };
+
 //     return (
 //         <div>
 //             <h5>Liste des tâches et sous-tâches prévues</h5>
@@ -147,23 +162,29 @@
 //                 <div key={task.id}>
 //                     {editingTaskId === task.id ? (
 //                         <>
+//                             <label htmlFor="designation">Designation</label>
 //                             <input
 //                                 type="text"
 //                                 name="designation"
 //                                 value={editedTasks[task.id]?.designation || task.designation}
 //                                 onChange={handleInputChange}
 //                             />
+//                             <br />
+//                             <label htmlFor="deadline">Deadline</label>
 //                             <input
 //                                 type="date"
 //                                 name="deadline"
 //                                 value={editedTasks[task.id]?.deadline || task.deadline}
 //                                 onChange={handleInputChange}
 //                             />
+//                             <br />
+//                             <label htmlFor="notes">Notes</label>
 //                             <textarea
 //                                 name="notes"
 //                                 value={editedTasks[task.id]?.notes || task.notes}
 //                                 onChange={handleInputChange}
 //                             />
+//                             <br />
 //                             <button onClick={() => handleSave(task.id)}>Valider</button>
 //                             <button onClick={handleCancel}>Annuler</button>
 //                         </>
@@ -172,15 +193,15 @@
 //                             <h3>{task.designation}</h3>
 //                             <p>{task.deadline}</p>
 //                             <p>{task.notes}</p>
-//                             <button onClick={() => handleDelete(task.id)}>Delete</button>
+//                             <button onClick={() => handleDeleteTask(task.id)}>Supprimer</button> {/* Bouton Supprimer */}
 //                             {task.checkListItems &&
 //                                 task.checkListItems.map((item) => (
 //                                     <div key={item.id}>
 //                                         <p>{item.name}</p>
-//                                         <button onClick={() => handleRemoveCheckListItem(item.id)}>Delete</button>
+//                                         <button onClick={() => handleRemoveCheckListItem(item.id)}>Supprimer</button>
 //                                     </div>
 //                                 ))}
-//                             <button onClick={() => handleAddCheckListItem(task.id)}>Add CheckList Item</button>
+//                             <button onClick={() => handleAddCheckListItem(task.id)}>Ajouter une sous-tâche</button>
 //                             <button onClick={() => handleEdit(task.id)}>Modifier</button>
 //                         </>
 //                     )}
@@ -193,8 +214,9 @@
 
 // export default TaskLists;
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./tasksList.css";
 
 export type Task = {
     id: number;
@@ -333,52 +355,87 @@ const TaskLists = () => {
         }));
     };
 
+    const handleDeleteTask = async (taskId: number) => {
+        try {
+            await axios.delete(`http://localhost:3000/tasks/${taskId}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                },
+            });
+
+            const updatedTasks = tasks.filter((task) => task.id !== taskId);
+            setTasks(updatedTasks);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <div>
             <h5>Liste des tâches et sous-tâches prévues</h5>
-            {tasks.map((task) => (
-                <div key={task.id}>
-                    {editingTaskId === task.id ? (
-                        <>
-                            <input type="text"
-                                name="designation"
-                                value={editedTasks[task.id]?.designation || task.designation}
-                                onChange={handleInputChange}
-                            />
-                            <input
-                                type="date"
-                                name="deadline"
-                                value={editedTasks[task.id]?.deadline || task.deadline}
-                                onChange={handleInputChange}
-                            />
-                            <textarea
-                                name="notes"
-                                value={editedTasks[task.id]?.notes || task.notes}
-                                onChange={handleInputChange}
-                            />
-                            <button onClick={() => handleSave(task.id)}>Valider</button>
-                            <button onClick={handleCancel}>Annuler</button>
-                        </>
-                    ) : (
-                        <>
-                            <h3>{task.designation}</h3>
-                            <p>{task.deadline}</p>
-                            <p>{task.notes}</p>
-                            <button onClick={() => handleDelete(task.id)}>Delete</button>
-                            {task.checkListItems &&
-                                task.checkListItems.map((item) => (
-                                    <div key={item.id}>
-                                        <p>{item.name}</p>
-                                        <button onClick={() => handleRemoveCheckListItem(item.id)}>Delete</button>
-                                    </div>
-                                ))}
-                            <button onClick={() => handleAddCheckListItem(task.id)}>Add CheckList Item</button>
-                            <button onClick={() => handleEdit(task.id)}>Modifier</button>
-                        </>
-                    )}
-                    <hr />
-                </div>
-            ))}
+            <div className="container">
+                {tasks.map((task) => (
+                    <div className="task" key={task.id}>
+                        {editingTaskId === task.id ? (
+                            <>
+                                <label htmlFor="designation">Designation</label>
+                                <input
+                                    type="text"
+                                    name="designation"
+                                    value={editedTasks[task.id]?.designation || task.designation}
+                                    onChange={handleInputChange}
+                                />
+                                <br />
+                                <label htmlFor="deadline">Deadline</label>
+                                <input
+                                    type="date"
+                                    name="deadline"
+                                    value={editedTasks[task.id]?.deadline || task.deadline}
+                                    onChange={handleInputChange}
+                                />
+                                <br />
+                                <label htmlFor="notes">Notes</label>
+                                <textarea
+                                    name="notes"
+                                    value={editedTasks[task.id]?.notes || task.notes}
+                                    onChange={handleInputChange}
+                                />
+                                <br />
+                                <button className="save-button" onClick={() => handleSave(task.id)}>
+                                    Valider
+                                </button>
+                                <button className="delete-button" onClick={handleCancel}>
+                                    Annuler
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <h3>{task.designation}</h3>
+                                <p>{task.deadline}</p>
+                                <p>{task.notes}</p>
+                                <button className="delete-button" onClick={() => handleDeleteTask(task.id)}>
+                                    Supprimer
+                                </button> {/* Bouton Supprimer */}
+                                {task.checkListItems &&
+                                    task.checkListItems.map((item) => (
+                                        <div className="subtask" key={item.id}>
+                                            <p>{item.name}</p>
+                                            <button className="delete-button" onClick={() => handleRemoveCheckListItem(item.id)}>
+                                                Supprimer
+                                            </button>
+                                        </div>
+                                    ))}
+                                <button className="add-button" onClick={() => handleAddCheckListItem(task.id)}>
+                                    Ajouter une sous-tâche
+                                </button>
+                                <button className="edit-button" onClick={() => handleEdit(task.id)}>
+                                    Modifier
+                                </button>
+                            </>
+                        )}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

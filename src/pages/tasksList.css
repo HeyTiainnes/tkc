@@ -1,0 +1,66 @@
+/* tasksList.css */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.task {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+}
+
+.subtask {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    width: 250px;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.save-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.add-button {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .task {
+        width: 100%;
+    }
+
+    .subtask {
+        width: 100%;
+    }
+}
