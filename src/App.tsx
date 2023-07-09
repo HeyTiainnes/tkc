@@ -25,33 +25,16 @@ function App() {
           <Route path="/PatchUsers/:id" element={<PatchUsers />} />
           <Route
             path="/ConnexionPage"
-            element={
-              <LoginForm
-                onLoginSuccess={() => {
-                  throw new Error("Function not implemented.");
-                }}
-              />
-            }
+            element={<LoginForm onLoginSuccess={() => { }} />}
           />
           <Route path="/TaskDetails/:taskId" element={<TaskDetail />} />
-
           <Route
             path="/NewTask"
             element={<NewTask redirectTo="/TaskLists" />}
           />
           <Route
             path="/PatchTask/:id"
-            element={
-              <PatchTask
-                task={{
-                  id: 0,
-                  designation: "",
-                  deadline: "",
-                  notes: "",
-                  done: false,
-                }}
-              />
-            }
+            element={<PatchTask task={{ id: 0, designation: "", deadline: "", notes: "", done: false }} />}
           />
           <Route path="/NewCheckList/:taskId" element={<NewCheckList />} />
         </Routes>
