@@ -9,20 +9,20 @@ interface User {
 }
 
 const PatchUsers = () => {
-    const { id } = useParams<{ id: string }>(); // Récupération de l'ID de l'utilisateur à modifier depuis l'URL
-    const [user, setUser] = useState<User>({ id_users: id ?? '', name: '', email: '' }); // Déclaration d'un état local pour l'utilisateur à modifier
+    const { id } = useParams<{ id: string }>();
+    const [user, setUser] = useState<User>({ id_users: id ?? '', name: '', email: '' });
 
 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        setUser({ ...user, [name]: value }); // Mettre à jour l'état local de l'utilisateur avec les nouvelles valeurs du formulaire
+        setUser({ ...user, [name]: value });
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); // Empêcher la soumission du formulaire par défaut
+        event.preventDefault();
         axios
-            .patch(`http://localhost:3000/theyUsers/${id}`, { name: user.name, email: user.email }) // Envoyer une requête PATCH vers l'API pour mettre à jour l'utilisateur correspondant
+            .patch(`http://localhost:3000/theyUsers/${id}`, { name: user.name, email: user.email })
             .then(() => {
                 console.log('Utilisateur modifié avec succès');
             })
@@ -34,7 +34,7 @@ const PatchUsers = () => {
     useEffect(() => {
         axios
             .get<User>(`http://localhost:3000/theyUsers/${id}`)
-            // Récupérer les informations de l'utilisateur correspondant depuis l'API
+
             .then((response) => {
                 setUser(response.data);
             })
